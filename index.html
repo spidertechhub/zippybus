@@ -88,7 +88,7 @@
             text-align: center;
             padding: 10px 20px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 14px; /* Base font size for the descriptive text */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -103,6 +103,10 @@
             display: inline-flex;
             align-items: center;
             gap: 5px;
+            font-size: 20px; /* Increased size for the phone number on desktop */
+        }
+        .fixed-banner a i {
+            font-size: 20px; /* Adjust icon size to match text */
         }
 
         /* --- FLOATING ROUNDED HEADER --- */
@@ -135,21 +139,19 @@
         .btn-call {
             background: var(--zb-yellow);
             color: var(--zb-navy);
-            padding: 12px 28px;
+            padding: 12px 24px;
             border-radius: var(--radius-pill);
-            font-weight: 800;
+            font-weight: 900;
             font-size: 16px;
             display: flex;
             align-items: center;
             gap: 8px;
             transition: var(--transition);
-            animation: pulse-ring 2s infinite;
         }
         .btn-call:hover {
             background: var(--zb-navy);
             color: var(--zb-yellow);
             transform: translateY(-2px);
-            animation: none;
         }
 
         /* --- HERO SECTION --- */
@@ -170,7 +172,7 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=2069&auto=format&fit=crop') center/cover;
+            background: url('https://images.unsplash.com/photo-1572675339312-3e8b094a544d?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover;
             opacity: 0.15;
             z-index: 0;
         }
@@ -189,7 +191,6 @@
             color: var(--zb-white);
         }
         
-        /* Yellow text is now highly readable on Navy background */
         .hero h1 span { 
             color: var(--zb-yellow); 
         }
@@ -197,11 +198,38 @@
         .hero p {
             font-size: clamp(16px, 2vw, 20px);
             color: #CBD5E1;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             max-width: 700px;
             line-height: 1.6;
             margin-left: auto;
             margin-right: auto;
+        }
+
+        /* --- NEW PROMINENT HERO BUTTON --- */
+        .hero-btn-call {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: var(--zb-yellow);
+            color: var(--zb-navy);
+            padding: 18px 40px;
+            border-radius: var(--radius-pill);
+            font-weight: 900;
+            font-size: 22px;
+            transition: var(--transition);
+            box-shadow: 0 8px 24px rgba(255, 213, 0, 0.25);
+            animation: pulse-ring 2s infinite;
+        }
+        .hero-btn-call i {
+            font-size: 24px;
+        }
+        .hero-btn-call:hover {
+            background: var(--zb-white);
+            color: var(--zb-navy);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(255, 255, 255, 0.2);
+            animation: none;
         }
 
         /* --- CUSTOM BOOKING WIDGET --- */
@@ -280,6 +308,12 @@
         }
         .widget-submit:hover {
             background: var(--zb-yellow);
+            color: var(--zb-navy);
+        }
+        .widget-submit i {
+            color: var(--zb-yellow);
+        }
+        .widget-submit:hover i {
             color: var(--zb-navy);
         }
 
@@ -372,17 +406,24 @@
         }
 
         .h-card-link {
-            font-weight: 800;
+            font-weight: 900;
             color: var(--zb-navy);
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 15px;
+            gap: 8px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        .h-card-link i {
+            color: var(--zb-yellow);
+            font-size: 18px;
             transition: var(--transition);
         }
         .h-card:hover .h-card-link {
             color: #000;
-            gap: 12px;
+        }
+        .h-card:hover .h-card-link i {
+            color: var(--zb-navy);
         }
 
         /* --- FLOATING ACTION BUTTON --- */
@@ -469,14 +510,25 @@
             body { padding-top: 130px; }
             
             /* Mobile Header Adjustments */
-            .fixed-banner { font-size: 12px; padding: 8px; }
+            .fixed-banner { 
+                font-size: 12px; 
+                padding: 8px; 
+            }
+            .fixed-banner a {
+                font-size: 16px; /* Adjust for mobile to prevent overflow */
+            }
+            .fixed-banner a i {
+                font-size: 16px; /* Adjust icon size to match text on mobile */
+            }
+
             header { margin-top: 10px; padding: 8px 15px; width: 95%; }
             .logo { font-size: 20px; }
-            .btn-call { padding: 10px 18px; font-size: 14px; }
+            .btn-call { padding: 10px 14px; font-size: 14px; }
             
             /* Mobile Hero */
             .hero { padding-top: 60px; padding-bottom: 120px; }
             .hero h1 { font-size: 32px; }
+            .hero-btn-call { padding: 16px 28px; font-size: 18px; width: 100%; max-width: 320px; margin: 10px auto 0; }
             
             /* Mobile Widget */
             .mock-form { flex-direction: column; }
@@ -505,8 +557,9 @@
             <a href="#" class="logo">
                 <i class="bi bi-bus-front-fill"></i> Zippy Bus
             </a>
+            <!-- Replaced generic "Call Now" with the actual number -->
             <a href="tel:+16079527259" class="btn-call">
-                <i class="bi bi-telephone-outbound"></i> Call Now
+                <i class="bi bi-telephone-outbound-fill"></i> (607) 952-7259
             </a>
         </header>
     </div>
@@ -516,6 +569,11 @@
         <div class="hero-content reveal">
             <h1>Effortless Bus Ticket <span>Booking & Reservations</span></h1>
             <p>Your fastest route to nationwide bus travel. Call our booking specialists to instantly reserve tickets, modify itineraries, or process cancellations with ease.</p>
+            
+            <!-- NEW HIGH-VISIBILITY CALL BUTTON -->
+            <a href="tel:+16079527259" class="hero-btn-call">
+                <i class="bi bi-telephone-fill"></i> Call (607) 952-7259
+            </a>
         </div>
     </section>
 
@@ -542,8 +600,9 @@
                 <input type="text" class="input-value" placeholder="1 Adult" readonly>
             </div>
             
+            <!-- Replaced generic "Search" with phone number CTA -->
             <a href="tel:+16079527259" class="widget-submit">
-                Search <i class="bi bi-arrow-right"></i>
+                <i class="bi bi-telephone-fill"></i> Call (607) 952-7259 to Search
             </a>
         </form>
     </div>
@@ -564,7 +623,7 @@
                 <div class="h-card-content">
                     <h3>Book Bus Tickets</h3>
                     <p>Tell us your destination and travel dates. We'll find the most affordable nationwide bus routes and secure your seats instantly.</p>
-                    <span class="h-card-link">Call to Book <i class="bi bi-arrow-right"></i></span>
+                    <span class="h-card-link"><i class="bi bi-telephone-fill"></i> (607) 952-7259 to Book</span>
                 </div>
             </div>
 
@@ -574,7 +633,7 @@
                 <div class="h-card-content">
                     <h3>Seat Upgrades</h3>
                     <p>Enhance your journey. Call us to check availability for premium seating, extra legroom, or panoramic front-row spots.</p>
-                    <span class="h-card-link">Call to Upgrade <i class="bi bi-arrow-right"></i></span>
+                    <span class="h-card-link"><i class="bi bi-telephone-fill"></i> (607) 952-7259 to Upgrade</span>
                 </div>
             </div>
 
@@ -584,7 +643,7 @@
                 <div class="h-card-content">
                     <h3>Change Bus Schedule</h3>
                     <p>Did your plans change? We make modifying your itinerary simple. Call us to adjust your travel dates and times.</p>
-                    <span class="h-card-link">Call to Modify <i class="bi bi-arrow-right"></i></span>
+                    <span class="h-card-link"><i class="bi bi-telephone-fill"></i> (607) 952-7259 to Modify</span>
                 </div>
             </div>
 
@@ -594,7 +653,7 @@
                 <div class="h-card-content">
                     <h3>Cancel Reservations</h3>
                     <p>Fast and secure cancellations. We will guide you through the process and explain your refund or travel credit options.</p>
-                    <span class="h-card-link">Call to Cancel <i class="bi bi-arrow-right"></i></span>
+                    <span class="h-card-link"><i class="bi bi-telephone-fill"></i> (607) 952-7259 to Cancel</span>
                 </div>
             </div>
 
