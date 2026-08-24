@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zippy Bus | Effortless Bus Ticket Booking & Reservations</title>
+    <meta name="description" content="Call Zippy Bus for instant bus ticket bookings, schedule changes, and seat upgrades. Fast, secure, and easy nationwide bus travel reservations over the phone.">
+    <meta name="keywords" content="bus ticket booking, buy bus tickets online, phone bus reservations, nationwide bus routes, change bus schedule, cancel bus ticket, cheap bus tickets">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        /* --- DESIGN SYSTEM --- */
+        :root {
+            --zb-navy: #0A2540;        
+            --zb-navy-light: #173A5E;  
+            --zb-yellow: #FFD500;      
+            --zb-black: #121212;
+            --zb-white: #FFFFFF;
+            --zb-bg-gray: #F4F7F9;
+            --zb-border: #E2E8F0;
+            --zb-text: #334155;
+            
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-pill: 100px;
+            
+            --shadow-float: 0 12px 36px rgba(10, 37, 64, 0.12);
+            --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.06);
+            --shadow-card-hover: 0 16px 32px rgba(10, 37, 64, 0.15);
+            
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--zb-bg-gray);
+            color: var(--zb-text);
+            overflow-x: hidden;
+            padding-top: 140px; /* Safe space for fixed header */
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- ANIMATIONS --- */
+        @keyframes pulse-ring {
+            0% { box-shadow: 0 0 0 0 rgba(255, 213, 0, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 213, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 213, 0, 0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+
+        /* --- HEADER WRAPPER (Prevents mobile overlap) --- */
+        .header-wrapper {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 10000;
+        }
+
+        /* --- FIXED TOP BANNER --- */
+        .fixed-banner {
+            background: var(--zb-navy);
+            color: var(--zb-white);
+            text-align: center;
+            padding: 10px 20px;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px 15px;
+            min-height: 44px;
+        }
+        .fixed-banner a {
+            color: var(--zb-yellow);
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* --- FLOATING ROUNDED HEADER --- */
+        header {
+            margin: 15px auto 0;
+            width: 92%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: var(--radius-pill);
+            box-shadow: var(--shadow-float);
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--zb-navy);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-left: 10px;
+        }
+        .logo i { color: var(--zb-yellow); font-size: 26px; }
+
+        .btn-call {
+            background: var(--zb-yellow);
+            color: var(--zb-navy);
+            padding: 12px 28px;
+            border-radius: var(--radius-pill);
+            font-weight: 800;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            animation: pulse-ring 2s infinite;
+        }
+        .btn-call:hover {
+            background: var(--zb-navy);
+            color: var(--zb-yellow);
+            transform: translateY(-2px);
+            animation: none;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            position: relative;
+            padding: 80px 5% 160px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background-color: var(--zb-navy);
+            color: var(--zb-white);
+            overflow: hidden;
+        }
+
+        /* Background Image Overlay for Hero */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=2069&auto=format&fit=crop') center/cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 5vw, 64px);
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            max-width: 900px;
+            color: var(--zb-white);
+        }
+        
+        /* Yellow text is now highly readable on Navy background */
+        .hero h1 span { 
+            color: var(--zb-yellow); 
+        }
+
+        .hero p {
+            font-size: clamp(16px, 2vw, 20px);
+            color: #CBD5E1;
+            margin-bottom: 40px;
+            max-width: 700px;
+            line-height: 1.6;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- CUSTOM BOOKING WIDGET --- */
+        .widget-wrapper {
+            position: relative;
+            z-index: 10;
+            margin: -100px auto 80px;
+            width: 92%;
+            max-width: 1100px;
+            background: var(--zb-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-float);
+            padding: 12px;
+            border: 2px solid var(--zb-navy);
+        }
+
+        .mock-form {
+            display: flex;
+            flex-wrap: wrap;
+            background: var(--zb-white);
+            border-radius: var(--radius-md);
+        }
+
+        .input-block {
+            flex: 1 1 200px;
+            padding: 16px 24px;
+            border-right: 1px solid var(--zb-border);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .input-block:hover { background-color: var(--zb-bg-gray); }
+
+        .input-label {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--zb-navy);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .input-label i { color: var(--zb-yellow); font-size: 16px; }
+
+        .input-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--zb-black);
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            cursor: pointer;
+        }
+        .input-value::placeholder { color: #94A3B8; }
+
+        .widget-submit {
+            flex: 0 0 auto;
+            background: var(--zb-navy);
+            color: var(--zb-white);
+            border: none;
+            padding: 0 35px;
+            font-size: 18px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition);
+            border-radius: var(--radius-md);
+            margin: 6px;
+        }
+        .widget-submit:hover {
+            background: var(--zb-yellow);
+            color: var(--zb-navy);
+        }
+
+        /* --- SEO & VALUE PROP SECTION --- */
+        .seo-section {
+            padding: 0 5% 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .seo-section h2 {
+            font-size: 32px;
+            color: var(--zb-navy);
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+        .seo-section p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--zb-text);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* --- HORIZONTAL SERVICES CARDS --- */
+        .services-section {
+            padding: 0 5% 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .grid-horizontal {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 25px;
+        }
+
+        .h-card {
+            display: flex;
+            background: var(--zb-white);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            gap: 24px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--zb-border);
+            transition: var(--transition);
+            align-items: center;
+            cursor: pointer;
+        }
+        .h-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-card-hover);
+            border-color: var(--zb-navy);
+        }
+
+        .h-card-icon {
+            flex-shrink: 0;
+            width: 80px; height: 80px;
+            background: var(--zb-navy);
+            color: var(--zb-yellow);
+            border-radius: var(--radius-md);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            transition: var(--transition);
+        }
+        .h-card:hover .h-card-icon {
+            background: var(--zb-yellow);
+            color: var(--zb-navy);
+        }
+
+        .h-card-content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .h-card h3 {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--zb-navy);
+            margin-bottom: 8px;
+        }
+        .h-card p {
+            font-size: 15px;
+            color: var(--zb-text);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .h-card-link {
+            font-weight: 800;
+            color: var(--zb-navy);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 15px;
+            transition: var(--transition);
+        }
+        .h-card:hover .h-card-link {
+            color: #000;
+            gap: 12px;
+        }
+
+        /* --- FLOATING ACTION BUTTON --- */
+        .fab {
+            position: fixed;
+            bottom: 30px; right: 30px;
+            background: var(--zb-navy);
+            color: var(--zb-yellow);
+            width: 65px; height: 65px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            box-shadow: var(--shadow-float);
+            z-index: 9999;
+            transition: var(--transition);
+            border: 2px solid var(--zb-yellow);
+        }
+        .fab:hover {
+            transform: scale(1.1);
+            background: var(--zb-yellow);
+            color: var(--zb-navy);
+            border-color: var(--zb-navy);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--zb-navy);
+            color: var(--zb-white);
+            padding: 80px 5% 40px;
+        }
+
+        .disclaimer-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--zb-yellow);
+            padding: 24px;
+            border-radius: var(--radius-md);
+            margin-bottom: 50px;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #CBD5E1;
+        }
+        .disclaimer-box strong { color: var(--zb-white); }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-col h4 {
+            color: var(--zb-yellow);
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: #CBD5E1; transition: var(--transition); font-size: 15px; }
+        .footer-col ul li a:hover { color: var(--zb-white); padding-left: 5px; }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #94A3B8;
+            font-size: 14px;
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 992px) {
+            .grid-horizontal { grid-template-columns: 1fr; }
+            .widget-wrapper { margin-top: -60px; }
+            .input-block { flex-basis: 45%; border-bottom: 1px solid var(--zb-border); }
+            /* Remove right border from every 2nd element on tablet */
+            .input-block:nth-child(2n) { border-right: none; }
+            .input-block:nth-last-child(2) { border-right: none; }
+            .widget-submit { flex-basis: 100%; margin: 12px; padding: 18px; }
+        }
+
+        @media (max-width: 768px) {
+            body { padding-top: 130px; }
+            
+            /* Mobile Header Adjustments */
+            .fixed-banner { font-size: 12px; padding: 8px; }
+            header { margin-top: 10px; padding: 8px 15px; width: 95%; }
+            .logo { font-size: 20px; }
+            .btn-call { padding: 10px 18px; font-size: 14px; }
+            
+            /* Mobile Hero */
+            .hero { padding-top: 60px; padding-bottom: 120px; }
+            .hero h1 { font-size: 32px; }
+            
+            /* Mobile Widget */
+            .mock-form { flex-direction: column; }
+            .input-block { flex-basis: 100%; border-right: none !important; border-bottom: 1px solid var(--zb-border); padding: 12px 20px; }
+            .input-block:nth-last-child(2) { border-bottom: none; }
+            
+            /* Mobile Cards */
+            .h-card { flex-direction: column; text-align: center; gap: 15px; padding: 30px 20px; }
+            .h-card-icon { margin: 0 auto; }
+            .h-card-link { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. HEADER WRAPPER (Prevents overlapping on all devices) -->
+    <div class="header-wrapper">
+        <!-- FIXED TOP BANNER -->
+        <div class="fixed-banner">
+            <span>Independent Travel Booking Assistance</span>
+            <a href="tel:+16079527259"><i class="bi bi-telephone-fill"></i> (607) 952-7259</a>
+        </div>
+
+        <!-- FLOATING ROUNDED HEADER -->
+        <header>
+            <a href="#" class="logo">
+                <i class="bi bi-bus-front-fill"></i> Zippy Bus
+            </a>
+            <a href="tel:+16079527259" class="btn-call">
+                <i class="bi bi-telephone-outbound"></i> Call Now
+            </a>
+        </header>
+    </div>
+
+    <!-- 2. HERO SECTION (Dark background for perfect contrast) -->
+    <section class="hero">
+        <div class="hero-content reveal">
+            <h1>Effortless Bus Ticket <span>Booking & Reservations</span></h1>
+            <p>Your fastest route to nationwide bus travel. Call our booking specialists to instantly reserve tickets, modify itineraries, or process cancellations with ease.</p>
+        </div>
+    </section>
+
+    <!-- 3. CUSTOM BOOKING WIDGET (UI acts as a massive CTA) -->
+    <div class="widget-wrapper reveal delay-1">
+        <form action="tel:+16079527259" class="mock-form">
+            <div class="input-block" onclick="window.location.href='tel:+16079527259'">
+                <div class="input-label"><i class="bi bi-geo-alt-fill"></i> Leaving From</div>
+                <input type="text" class="input-value" placeholder="City or Station" readonly>
+            </div>
+            
+            <div class="input-block" onclick="window.location.href='tel:+16079527259'">
+                <div class="input-label"><i class="bi bi-pin-map-fill"></i> Going To</div>
+                <input type="text" class="input-value" placeholder="City or Station" readonly>
+            </div>
+            
+            <div class="input-block" onclick="window.location.href='tel:+16079527259'">
+                <div class="input-label"><i class="bi bi-calendar-event-fill"></i> Travel Date</div>
+                <input type="text" class="input-value" placeholder="Select Date" readonly>
+            </div>
+            
+            <div class="input-block" onclick="window.location.href='tel:+16079527259'">
+                <div class="input-label"><i class="bi bi-person-fill"></i> Passengers</div>
+                <input type="text" class="input-value" placeholder="1 Adult" readonly>
+            </div>
+            
+            <a href="tel:+16079527259" class="widget-submit">
+                Search <i class="bi bi-arrow-right"></i>
+            </a>
+        </form>
+    </div>
+
+    <!-- 4. SEO & VALUE PROP SECTION -->
+    <section class="seo-section reveal">
+        <h2>Why Choose Zippy Bus for Your Travel Needs?</h2>
+        <p>Finding cheap bus tickets and managing nationwide bus routes shouldn't be a hassle. Whether you need to secure a last-minute seat, change your bus schedule, or process a refund, our dedicated phone agents make bus ticket booking online seamless and stress-free. One call is all it takes to finalize your itinerary.</p>
+    </section>
+
+    <!-- 5. HORIZONTAL SERVICES CARDS (All trigger phone call) -->
+    <section class="services-section">
+        <div class="grid-horizontal">
+            
+            <!-- Card 1 -->
+            <div class="h-card reveal" onclick="window.location.href='tel:+16079527259'">
+                <div class="h-card-icon"><i class="bi bi-ticket-detailed-fill"></i></div>
+                <div class="h-card-content">
+                    <h3>Book Bus Tickets</h3>
+                    <p>Tell us your destination and travel dates. We'll find the most affordable nationwide bus routes and secure your seats instantly.</p>
+                    <span class="h-card-link">Call to Book <i class="bi bi-arrow-right"></i></span>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="h-card reveal delay-1" onclick="window.location.href='tel:+16079527259'">
+                <div class="h-card-icon"><i class="bi bi-star-fill"></i></div>
+                <div class="h-card-content">
+                    <h3>Seat Upgrades</h3>
+                    <p>Enhance your journey. Call us to check availability for premium seating, extra legroom, or panoramic front-row spots.</p>
+                    <span class="h-card-link">Call to Upgrade <i class="bi bi-arrow-right"></i></span>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="h-card reveal" onclick="window.location.href='tel:+16079527259'">
+                <div class="h-card-icon"><i class="bi bi-calendar2-range-fill"></i></div>
+                <div class="h-card-content">
+                    <h3>Change Bus Schedule</h3>
+                    <p>Did your plans change? We make modifying your itinerary simple. Call us to adjust your travel dates and times.</p>
+                    <span class="h-card-link">Call to Modify <i class="bi bi-arrow-right"></i></span>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="h-card reveal delay-1" onclick="window.location.href='tel:+16079527259'">
+                <div class="h-card-icon"><i class="bi bi-x-circle-fill"></i></div>
+                <div class="h-card-content">
+                    <h3>Cancel Reservations</h3>
+                    <p>Fast and secure cancellations. We will guide you through the process and explain your refund or travel credit options.</p>
+                    <span class="h-card-link">Call to Cancel <i class="bi bi-arrow-right"></i></span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 6. FLOATING ACTION BUTTON -->
+    <a href="tel:+16079527259" class="fab" aria-label="Call Now">
+        <i class="bi bi-telephone-fill"></i>
+    </a>
+
+    <!-- 7. FOOTER -->
+    <footer>
+        <div class="disclaimer-box reveal">
+            <strong>IMPORTANT DISCLAIMER:</strong> Zippy Bus is an independent travel assistance and referral service connecting travelers with independent booking agents. <strong>We are NOT affiliated with, endorsed by, or officially connected to Greyhound, FlixBus, Megabus, or any official bus carrier.</strong> Bookings made through our agents may include an agency service fee for their time and expertise in finding routes and managing itineraries. You always have the option to book tickets directly through the official carrier website without paying a service fee.
+        </div>
+
+        <div class="footer-grid reveal delay-1">
+            <div class="footer-col">
+                <div class="logo" style="color: var(--zb-white); margin-bottom: 15px;">
+                    <i class="bi bi-bus-front-fill"></i> Zippy Bus
+                </div>
+                <p style="color: #CBD5E1; font-size: 14px; line-height: 1.6;">Your trusted independent phone-based assistance service dedicated to making bus travel reservations easy, fast, and secure.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Quick Services</h4>
+                <ul>
+                    <li><a href="tel:+16079527259">Book a Ticket</a></li>
+                    <li><a href="tel:+16079527259">Change Itinerary</a></li>
+                    <li><a href="tel:+16079527259">Cancel Reservation</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li><a href="tel:+16079527259"><i class="bi bi-telephone"></i> (607) 952-7259</a></li>
+                    <li><a href="#"><i class="bi bi-envelope"></i> support@zippybus.com</a></li>
+                    <li><span style="color: #CBD5E1;"><i class="bi bi-geo-alt"></i> New York, NY, USA</span></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                    <li><a href="refund.html">Refund Policy</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2026 Zippy Bus Independent Travel Assistance. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- SCROLL ANIMATION SCRIPT -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); // Trigger once
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal');
+            revealElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
