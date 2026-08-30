@@ -3,54 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Refund Policy | Zippy Bus</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <title>Refund & Cancellation Policy | Zippy Bus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
-        :root { --zb-navy: #0A2540; --zb-yellow: #FFD500; --zb-bg: #F4F7F9; --zb-text: #334155; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
-        body { background-color: var(--zb-bg); color: var(--zb-text); line-height: 1.7; }
-        header { background: var(--zb-navy); padding: 20px 5%; text-align: center; }
-        header a { color: var(--zb-white); text-decoration: none; font-size: 24px; font-weight: 800; color: white; display: flex; justify-content: center; align-items: center; gap: 10px; }
-        header svg { width: 28px; height: 28px; }
-        .container { max-width: 800px; margin: 60px auto; background: white; padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(10,37,64,0.08); border-top: 5px solid var(--zb-yellow); }
-        h1 { color: var(--zb-navy); margin-bottom: 10px; font-size: 32px; font-weight: 800; }
-        .date { color: #94A3B8; font-size: 14px; margin-bottom: 30px; font-weight: 600; }
-        h2 { color: var(--zb-navy); margin: 30px 0 15px; font-size: 22px; font-weight: 800; }
-        p { margin-bottom: 20px; font-size: 16px; }
-        .alert-box { background: rgba(255,213,0,0.1); border-left: 4px solid var(--zb-yellow); padding: 20px; border-radius: 8px; margin-bottom: 20px; color: var(--zb-navy); font-weight: 600; }
-        .footer-simple { text-align: center; padding: 40px; color: #94A3B8; font-size: 14px; }
-        .footer-simple a { color: var(--zb-navy); font-weight: 600; text-decoration: none; margin: 0 10px; }
+        :root { --zb-navy: #0A2540; --zb-yellow: #FFD500; --zb-bg-gray: #F4F7F9; --zb-text: #334155; --zb-border: #E2E8F0; }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Outfit',sans-serif; }
+        body { background-color: var(--zb-bg-gray); color: var(--zb-text); padding-top: 145px; }
+        a { text-decoration: none; color: inherit; }
+        .header-wrapper { position: fixed; top: 0; left: 0; width: 100%; z-index: 10000; }
+        .fixed-banner { background: var(--zb-navy); color: #fff; text-align: center; padding: 10px; font-size: 14px; font-weight: 600; }
+        .fixed-banner a { color: var(--zb-yellow); font-weight: 800; font-size: 18px; margin-left: 10px; }
+        header { margin: 10px auto 0; width: 94%; max-width: 1240px; background: rgba(255,255,255,0.98); padding: 10px 24px; display: flex; justify-content: space-between; align-items: center; border-radius: 100px; box-shadow: 0 12px 36px rgba(10,37,64,0.12); }
+        .logo { font-size: 24px; font-weight: 900; color: var(--zb-navy); display: flex; align-items: center; gap: 8px; }
+        .logo i { color: var(--zb-yellow); }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { font-weight: 600; color: var(--zb-navy); font-size: 15px; }
+        .btn-call { background: var(--zb-yellow); color: var(--zb-navy); padding: 10px 20px; border-radius: 100px; font-weight: 800; font-size: 15px; }
+        .legal-content { max-width: 900px; margin: 40px auto 80px; background: #fff; padding: 50px 40px; border-radius: 20px; border: 1px solid var(--zb-border); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .legal-content h1 { font-size: 34px; color: var(--zb-navy); margin-bottom: 20px; }
+        .legal-content h2 { font-size: 20px; color: var(--zb-navy); margin-top: 25px; margin-bottom: 10px; }
+        .legal-content p { font-size: 15px; line-height: 1.8; color: var(--zb-text); margin-bottom: 15px; }
+        footer { background: var(--zb-navy); color: #fff; padding: 60px 5% 30px; text-align: center; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 14px; color: #94A3B8; }
+        @media (max-width: 992px) { .nav-links { display: none; } }
     </style>
 </head>
 <body>
-    <header>
-        <a href="index.html">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#FFD500" d="M4 16c0 .88.39 1.67 1 2.22V20c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h8v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4s-8 .5-8 4v10zm3.5 1c-.83 0-1.5-.67-1.5-1.5S6.67 14 7.5 14s1.5.67 1.5 1.5S8.33 17 7.5 17zm9 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm1.5-6H6V6h12v5z"/></svg>
-            Zippy Bus
-        </a>
-    </header>
-    <div class="container">
-        <h1>Refund Policy</h1>
-        <div class="date">Last Updated: July 15, 2026</div>
-        
-        <h2>1. Standard Bus Carrier Tickets</h2>
-        <p>As an independent booking assistance service, we adhere strictly to the ticketing rules and policies set forth by the official bus carriers (e.g., Greyhound, FlixBus, Barons Bus, etc.). Standard bus tickets are generally non-refundable for cash once the purchase is complete.</p>
-        
-        <h2>2. Travel Vouchers and Credits</h2>
-        <p>If you need to cancel your trip, you may be eligible to receive a travel voucher or credit for future use, provided the cancellation is made prior to the scheduled departure time (typically 2 to 24 hours in advance, depending on the specific carrier's rules). Travel vouchers are subject to the carrier's terms of use and may incur a cancellation or exchange penalty fee deducted by the carrier.</p>
-        
-        <h2>3. No-Shows and Missed Departures</h2>
-        <p>If you miss your scheduled bus or fail to cancel your ticket prior to the required cutoff time, your ticket will be voided. No refunds, vouchers, or travel credits will be issued for no-shows under any circumstances.</p>
-        
-        <div class="alert-box">
-            <h2>4. Agency Service Fees</h2>
-            <p style="margin-bottom:0;">Please note that any agency or service fees charged by Zippy Bus LLC for booking, changing, or assisting with your travel arrangements over the phone are strictly <strong>non-refundable</strong>. These fees compensate our independent agents for their time, expertise, and the assistance provided at the time of your call, regardless of whether you ultimately take the trip or cancel it.</p>
-        </div>
+    <div class="header-wrapper">
+        <div class="fixed-banner">Independent Travel Assistance <a href="tel:+16079527259"><i class="bi bi-telephone-fill"></i> (607) 952-7259</a></div>
+        <header>
+            <a href="index.html" class="logo"><i class="bi bi-bus-front-fill"></i> Zippy Bus</a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="faq.html">FAQ</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <a href="tel:+16079527259" class="btn-call"><i class="bi bi-telephone-outbound-fill"></i> (607) 952-7259</a>
+        </header>
     </div>
-    <div class="footer-simple">
-        <a href="index.html">Home</a> | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a><br><br>
-        &copy; 2026 Zippy Bus LLC. All rights reserved.
+
+    <div class="legal-content">
+        <h1>Refund & Cancellation Policy</h1>
+        <p><strong>Effective Date:</strong> January 1, 2026</p>
+        
+        <h2>1. Carrier Cancellation Policies</h2>
+        <p>Refund eligibility for bus tickets depends on the fare rules of the operating bus line (e.g. Standard, Flexible, or Non-Refundable economy fares). Some tickets may be refundable up to 24 hours prior to departure, while others may only qualify for carrier travel vouchers.</p>
+
+        <h2>2. Agency Service Fees</h2>
+        <p>Agency convenience fees charged by Zippy Bus cover the live consultation, inventory search, and booking labor performed by our phone agents. These convenience fees are non-refundable once the booking service has been completed.</p>
+
+        <h2>3. Requesting a Cancellation or Refund</h2>
+        <p>To request a schedule adjustment or cancellation, call our support desk at <strong>(607) 952-7259</strong> with your confirmation number and departure details ready.</p>
     </div>
+
+    <footer>
+        <div class="footer-bottom">&copy; 2026 Zippy Bus Independent Travel Assistance. All rights reserved. | <a href="privacy.html" style="color:var(--zb-yellow);">Privacy</a> | <a href="terms.html" style="color:var(--zb-yellow);">Terms</a></div>
+    </footer>
 </body>
 </html>

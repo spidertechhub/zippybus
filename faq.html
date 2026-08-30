@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions | Zippy Bus Support</title>
+    <meta name="description" content="Common questions and answers regarding bus reservations, ticket changes, agency fees, luggage guidelines, and carrier affiliations.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        :root {
+            --zb-navy: #0A2540; --zb-navy-light: #173A5E; --zb-yellow: #FFD500;
+            --zb-black: #121212; --zb-white: #FFFFFF; --zb-bg-gray: #F4F7F9;
+            --zb-border: #E2E8F0; --zb-text: #334155;
+            --radius-md: 16px; --radius-lg: 24px; --radius-pill: 100px;
+            --shadow-float: 0 12px 36px rgba(10, 37, 64, 0.12);
+            --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        body { background-color: var(--zb-bg-gray); color: var(--zb-text); overflow-x: hidden; padding-top: 145px; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        
+        .header-wrapper { position: fixed; top: 0; left: 0; width: 100%; z-index: 10000; }
+        .fixed-banner {
+            background: var(--zb-navy); color: var(--zb-white); text-align: center;
+            padding: 10px 20px; font-weight: 600; font-size: 14px;
+            display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px 15px;
+        }
+        .fixed-banner a { color: var(--zb-yellow); font-weight: 800; display: inline-flex; align-items: center; gap: 5px; font-size: 18px; }
+        
+        header {
+            margin: 10px auto 0; width: 94%; max-width: 1240px;
+            background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(12px);
+            padding: 10px 24px; display: flex; justify-content: space-between; align-items: center;
+            border-radius: var(--radius-pill); box-shadow: var(--shadow-float); border: 1px solid rgba(255,255,255,0.8);
+        }
+        .logo { font-size: 24px; font-weight: 900; color: var(--zb-navy); display: flex; align-items: center; gap: 8px; }
+        .logo i { color: var(--zb-yellow); font-size: 26px; }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links a { font-weight: 600; color: var(--zb-navy); transition: var(--transition); font-size: 15px; }
+        .nav-links a:hover, .nav-links a.active { color: #f59e0b; }
+        
+        .btn-call {
+            background: var(--zb-yellow); color: var(--zb-navy); padding: 10px 20px;
+            border-radius: var(--radius-pill); font-weight: 800; font-size: 15px;
+            display: flex; align-items: center; gap: 8px; transition: var(--transition);
+        }
+
+        .page-header { background: var(--zb-navy); color: #fff; padding: 60px 5% 80px; text-align: center; }
+        .page-header h1 { font-size: 42px; font-weight: 900; margin-bottom: 15px; }
+        .page-header p { font-size: 18px; color: #CBD5E1; max-width: 700px; margin: 0 auto; }
+
+        .faq-section { padding: 80px 5%; max-width: 900px; margin: 0 auto; }
+        .faq-item {
+            background: #fff; border-radius: var(--radius-md); border: 1px solid var(--zb-border);
+            padding: 24px; margin-bottom: 20px; box-shadow: var(--shadow-card);
+        }
+        .faq-item h3 { font-size: 20px; font-weight: 800; color: var(--zb-navy); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .faq-item h3 i { color: var(--zb-yellow); font-size: 22px; }
+        .faq-item p { font-size: 16px; line-height: 1.7; color: var(--zb-text); }
+
+        .fab {
+            position: fixed; bottom: 30px; right: 30px; background: var(--zb-navy); color: var(--zb-yellow);
+            width: 65px; height: 65px; border-radius: 50%; display: flex; justify-content: center;
+            align-items: center; font-size: 28px; box-shadow: var(--shadow-float); z-index: 9999;
+            border: 2px solid var(--zb-yellow);
+        }
+
+        footer { background: var(--zb-navy); color: var(--zb-white); padding: 80px 5% 40px; }
+        .disclaimer-box {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--zb-yellow); padding: 24px; border-radius: var(--radius-md);
+            margin-bottom: 50px; font-size: 14px; line-height: 1.7; color: #CBD5E1;
+        }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 50px; }
+        .footer-col h4 { color: var(--zb-yellow); font-size: 18px; font-weight: 800; margin-bottom: 20px; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: #CBD5E1; transition: var(--transition); font-size: 15px; }
+        .footer-col ul li a:hover { color: var(--zb-white); padding-left: 4px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #94A3B8; font-size: 14px; }
+
+        @media (max-width: 992px) { .nav-links { display: none; } }
+    </style>
+</head>
+<body>
+
+    <div class="header-wrapper">
+        <div class="fixed-banner">
+            <span>Independent Travel Booking Assistance</span>
+            <a href="tel:+16079527259"><i class="bi bi-telephone-fill"></i> (607) 952-7259</a>
+        </div>
+        <header>
+            <a href="index.html" class="logo"><i class="bi bi-bus-front-fill"></i> Zippy Bus</a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="faq.html" class="active">FAQs</a>
+                <a href="blog.html">Travel Blog</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <a href="tel:+16079527259" class="btn-call"><i class="bi bi-telephone-outbound-fill"></i> (607) 952-7259</a>
+        </header>
+    </div>
+
+    <section class="page-header">
+        <h1>Frequently Asked Questions</h1>
+        <p>Get answers to common queries regarding ticketing, modifications, fees, and carrier policies.</p>
+    </section>
+
+    <div class="faq-section">
+        
+        <div class="faq-item">
+            <h3><i class="bi bi-patch-question-fill"></i> How does Zippy Bus work?</h3>
+            <p>Zippy Bus is an independent phone-based booking service. When you call (607) 952-7259, you are connected with a travel agent who searches live bus carrier inventories, compares fares, books your tickets, and issues confirmations directly to you.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3><i class="bi bi-patch-question-fill"></i> Is Zippy Bus affiliated with official bus carriers?</h3>
+            <p>No. Zippy Bus is an independent travel referral and booking service. We are not officially affiliated with or endorsed by Greyhound, FlixBus, Megabus, Trailways, or any other official bus transit provider.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3><i class="bi bi-patch-question-fill"></i> Are there service fees when booking by phone?</h3>
+            <p>Yes. Tickets booked or modified through our agents may include a convenience service fee to cover our agent support and itinerary management services. Travelers always retain the choice to book tickets directly on carrier websites without paying agency fees.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3><i class="bi bi-patch-question-fill"></i> How do I receive my bus tickets?</h3>
+            <p>Once your reservation is finalized over the phone, your digital e-ticket and boarding QR code are instantly sent to your email address and via SMS text message.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3><i class="bi bi-patch-question-fill"></i> Can I change or cancel my bus schedule?</h3>
+            <p>Yes. Call our desk at (607) 952-7259. Depending on the carrier and fare class chosen, our agents will process schedule modifications or explain applicable carrier credits and refund rules.</p>
+        </div>
+
+    </div>
+
+    <a href="tel:+16079527259" class="fab" aria-label="Call Now"><i class="bi bi-telephone-fill"></i></a>
+
+    <footer>
+        <div class="disclaimer-box">
+            <strong>IMPORTANT DISCLAIMER:</strong> Zippy Bus is an independent travel assistance and referral service connecting travelers with independent booking agents. <strong>We are NOT affiliated with, endorsed by, or officially connected to Greyhound, FlixBus, Megabus, or any official bus carrier.</strong> Bookings made through our agents may include an agency service fee. You always have the option to book tickets directly through official carrier channels without a service fee.
+        </div>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="color: var(--zb-white); margin-bottom: 15px;"><i class="bi bi-bus-front-fill"></i> Zippy Bus</div>
+                <p style="color: #CBD5E1; font-size: 14px;">Your trusted independent phone-based assistance service dedicated to making bus travel reservations easy.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="tel:+16079527259"><i class="bi bi-telephone"></i> (607) 952-7259</a></li>
+                    <li><a href="mailto:support@zippybus.online"><i class="bi bi-envelope"></i> support@zippybus.online</a></li>
+                    <li><span style="color: #CBD5E1;"><i class="bi bi-geo-alt"></i> New York, NY, USA</span></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                    <li><a href="refund.html">Refund Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">&copy; 2026 Zippy Bus Independent Travel Assistance. All rights reserved.</div>
+    </footer>
+</body>
+</html>

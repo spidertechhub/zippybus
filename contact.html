@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Zippy Bus Phone Ticketing Desk</title>
+    <meta name="description" content="Contact Zippy Bus via phone or email for immediate travel reservations, schedule adjustments, or general travel inquiries.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        :root {
+            --zb-navy: #0A2540; --zb-navy-light: #173A5E; --zb-yellow: #FFD500;
+            --zb-black: #121212; --zb-white: #FFFFFF; --zb-bg-gray: #F4F7F9;
+            --zb-border: #E2E8F0; --zb-text: #334155;
+            --radius-md: 16px; --radius-lg: 24px; --radius-pill: 100px;
+            --shadow-float: 0 12px 36px rgba(10, 37, 64, 0.12);
+            --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        body { background-color: var(--zb-bg-gray); color: var(--zb-text); overflow-x: hidden; padding-top: 145px; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        
+        .header-wrapper { position: fixed; top: 0; left: 0; width: 100%; z-index: 10000; }
+        .fixed-banner {
+            background: var(--zb-navy); color: var(--zb-white); text-align: center;
+            padding: 10px 20px; font-weight: 600; font-size: 14px;
+            display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px 15px;
+        }
+        .fixed-banner a { color: var(--zb-yellow); font-weight: 800; display: inline-flex; align-items: center; gap: 5px; font-size: 18px; }
+        
+        header {
+            margin: 10px auto 0; width: 94%; max-width: 1240px;
+            background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(12px);
+            padding: 10px 24px; display: flex; justify-content: space-between; align-items: center;
+            border-radius: var(--radius-pill); box-shadow: var(--shadow-float); border: 1px solid rgba(255,255,255,0.8);
+        }
+        .logo { font-size: 24px; font-weight: 900; color: var(--zb-navy); display: flex; align-items: center; gap: 8px; }
+        .logo i { color: var(--zb-yellow); font-size: 26px; }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links a { font-weight: 600; color: var(--zb-navy); transition: var(--transition); font-size: 15px; }
+        .nav-links a:hover, .nav-links a.active { color: #f59e0b; }
+        
+        .btn-call {
+            background: var(--zb-yellow); color: var(--zb-navy); padding: 10px 20px;
+            border-radius: var(--radius-pill); font-weight: 800; font-size: 15px;
+            display: flex; align-items: center; gap: 8px; transition: var(--transition);
+        }
+
+        .page-header { background: var(--zb-navy); color: #fff; padding: 60px 5% 80px; text-align: center; }
+        .page-header h1 { font-size: 42px; font-weight: 900; margin-bottom: 15px; }
+        .page-header p { font-size: 18px; color: #CBD5E1; max-width: 700px; margin: 0 auto; }
+
+        .contact-section { padding: 80px 5%; max-width: 1100px; margin: 0 auto; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .contact-info-card {
+            background: #fff; border-radius: var(--radius-lg); padding: 40px 30px;
+            border: 1px solid var(--zb-border); box-shadow: var(--shadow-card);
+        }
+        .contact-info-card h2 { font-size: 26px; font-weight: 900; color: var(--zb-navy); margin-bottom: 20px; }
+        .info-row { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 25px; }
+        .info-row i { font-size: 24px; color: var(--zb-navy); }
+        .info-row div h4 { font-size: 16px; font-weight: 800; color: var(--zb-navy); }
+        .info-row div p, .info-row div a { font-size: 15px; color: var(--zb-text); }
+        
+        .contact-form-card {
+            background: #fff; border-radius: var(--radius-lg); padding: 40px 30px;
+            border: 1px solid var(--zb-border); box-shadow: var(--shadow-card);
+        }
+        .contact-form-card h3 { font-size: 22px; font-weight: 900; color: var(--zb-navy); margin-bottom: 20px; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-weight: 700; font-size: 14px; margin-bottom: 6px; color: var(--zb-navy); }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--zb-border);
+            font-size: 15px; outline: none; transition: var(--transition);
+        }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--zb-navy); }
+        .btn-submit {
+            width: 100%; background: var(--zb-navy); color: #fff; border: none; padding: 14px;
+            border-radius: var(--radius-pill); font-weight: 800; font-size: 16px; cursor: pointer; transition: var(--transition);
+        }
+        .btn-submit:hover { background: var(--zb-yellow); color: var(--zb-navy); }
+
+        .fab {
+            position: fixed; bottom: 30px; right: 30px; background: var(--zb-navy); color: var(--zb-yellow);
+            width: 65px; height: 65px; border-radius: 50%; display: flex; justify-content: center;
+            align-items: center; font-size: 28px; box-shadow: var(--shadow-float); z-index: 9999;
+            border: 2px solid var(--zb-yellow);
+        }
+
+        footer { background: var(--zb-navy); color: var(--zb-white); padding: 80px 5% 40px; }
+        .disclaimer-box {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--zb-yellow); padding: 24px; border-radius: var(--radius-md);
+            margin-bottom: 50px; font-size: 14px; line-height: 1.7; color: #CBD5E1;
+        }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 50px; }
+        .footer-col h4 { color: var(--zb-yellow); font-size: 18px; font-weight: 800; margin-bottom: 20px; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: #CBD5E1; transition: var(--transition); font-size: 15px; }
+        .footer-col ul li a:hover { color: var(--zb-white); padding-left: 4px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #94A3B8; font-size: 14px; }
+
+        @media (max-width: 992px) {
+            .nav-links { display: none; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-wrapper">
+        <div class="fixed-banner">
+            <span>Independent Travel Booking Assistance</span>
+            <a href="tel:+16079527259"><i class="bi bi-telephone-fill"></i> (607) 952-7259</a>
+        </div>
+        <header>
+            <a href="index.html" class="logo"><i class="bi bi-bus-front-fill"></i> Zippy Bus</a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="faq.html">FAQs</a>
+                <a href="blog.html">Travel Blog</a>
+                <a href="contact.html" class="active">Contact</a>
+            </nav>
+            <a href="tel:+16079527259" class="btn-call"><i class="bi bi-telephone-outbound-fill"></i> (607) 952-7259</a>
+        </header>
+    </div>
+
+    <section class="page-header">
+        <h1>Contact Zippy Bus</h1>
+        <p>Our telephone support desk is open daily to help you book, modify, or manage your nationwide bus travel.</p>
+    </section>
+
+    <div class="contact-section">
+        <div class="contact-grid">
+            
+            <div class="contact-info-card">
+                <h2>Direct Assistance Desk</h2>
+                <div class="info-row">
+                    <i class="bi bi-telephone-fill"></i>
+                    <div>
+                        <h4>Phone Number</h4>
+                        <p><a href="tel:+16079527259" style="font-weight: 800; color: var(--zb-navy); font-size: 18px;">(607) 952-7259</a></p>
+                        <small style="color: #64748B;">Immediate reservations & ticketing support</small>
+                    </div>
+                </div>
+
+                <div class="info-row">
+                    <i class="bi bi-envelope-fill"></i>
+                    <div>
+                        <h4>Email Support</h4>
+                        <p><a href="mailto:support@zippybus.online">support@zippybus.online</a></p>
+                        <small style="color: #64748B;">General feedback & inquiries</small>
+                    </div>
+                </div>
+
+                <div class="info-row">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    <div>
+                        <h4>Headquarters</h4>
+                        <p>Zippy Bus Travel Assistance</p>
+                        <p>New York, NY 10001, USA</p>
+                    </div>
+                </div>
+
+                <div class="info-row">
+                    <i class="bi bi-clock-fill"></i>
+                    <div>
+                        <h4>Phone Desk Hours</h4>
+                        <p>Monday – Sunday: 24/7 Phone Assistance</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-card">
+                <h3>Send an Inquiry</h3>
+                <form action="tel:+16079527259">
+                    <div class="form-group">
+                        <label>Your Full Name</label>
+                        <input type="text" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Your Phone Number</label>
+                        <input type="tel" placeholder="(555) 000-0000" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="john@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Message / Trip Details</label>
+                        <textarea rows="4" placeholder="From city, destination city, preferred departure date..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit"><i class="bi bi-telephone-fill"></i> Call (607) 952-7259 for Quick Booking</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <a href="tel:+16079527259" class="fab" aria-label="Call Now"><i class="bi bi-telephone-fill"></i></a>
+
+    <footer>
+        <div class="disclaimer-box">
+            <strong>IMPORTANT DISCLAIMER:</strong> Zippy Bus is an independent travel assistance and referral service connecting travelers with independent booking agents. <strong>We are NOT affiliated with, endorsed by, or officially connected to Greyhound, FlixBus, Megabus, or any official bus carrier.</strong> Bookings made through our agents may include an agency service fee. You always have the option to book tickets directly through official carrier channels without a service fee.
+        </div>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="color: var(--zb-white); margin-bottom: 15px;"><i class="bi bi-bus-front-fill"></i> Zippy Bus</div>
+                <p style="color: #CBD5E1; font-size: 14px;">Your trusted independent phone-based assistance service dedicated to making bus travel reservations easy.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="tel:+16079527259"><i class="bi bi-telephone"></i> (607) 952-7259</a></li>
+                    <li><a href="mailto:support@zippybus.online"><i class="bi bi-envelope"></i> support@zippybus.online</a></li>
+                    <li><span style="color: #CBD5E1;"><i class="bi bi-geo-alt"></i> New York, NY, USA</span></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                    <li><a href="refund.html">Refund Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">&copy; 2026 Zippy Bus Independent Travel Assistance. All rights reserved.</div>
+    </footer>
+</body>
+</html>

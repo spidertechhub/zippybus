@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zippy Bus | Effortless Bus Ticket Booking & Reservations</title>
+    <title>Zippy Bus | Effortless Bus Ticket Booking & Nationwide Reservations</title>
     <meta name="description" content="Call Zippy Bus for instant bus ticket bookings, schedule changes, and seat upgrades. Fast, secure, and easy nationwide bus travel reservations over the phone.">
     <meta name="keywords" content="bus ticket booking, buy bus tickets online, phone bus reservations, nationwide bus routes, change bus schedule, cancel bus ticket, cheap bus tickets">
     
-    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     
     <style>
-        /* --- DESIGN SYSTEM --- */
         :root {
             --zb-navy: #0A2540;        
             --zb-navy-light: #173A5E;  
@@ -24,519 +22,186 @@
             --zb-bg-gray: #F4F7F9;
             --zb-border: #E2E8F0;
             --zb-text: #334155;
-            
             --radius-md: 16px;
             --radius-lg: 24px;
             --radius-pill: 100px;
-            
             --shadow-float: 0 12px 36px rgba(10, 37, 64, 0.12);
             --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.06);
             --shadow-card-hover: 0 16px 32px rgba(10, 37, 64, 0.15);
-            
             --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Outfit', sans-serif;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
         html { scroll-behavior: smooth; }
-
-        body {
-            background-color: var(--zb-bg-gray);
-            color: var(--zb-text);
-            overflow-x: hidden;
-            padding-top: 140px; /* Safe space for fixed header */
-        }
-
+        body { background-color: var(--zb-bg-gray); color: var(--zb-text); overflow-x: hidden; padding-top: 145px; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
 
-        /* --- ANIMATIONS --- */
         @keyframes pulse-ring {
             0% { box-shadow: 0 0 0 0 rgba(255, 213, 0, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(255, 213, 0, 0); }
             100% { box-shadow: 0 0 0 0 rgba(255, 213, 0, 0); }
         }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
         .delay-1 { transition-delay: 0.1s; }
         .delay-2 { transition-delay: 0.2s; }
 
-        /* --- HEADER WRAPPER (Prevents mobile overlap) --- */
-        .header-wrapper {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            z-index: 10000;
-        }
-
-        /* --- FIXED TOP BANNER --- */
+        .header-wrapper { position: fixed; top: 0; left: 0; width: 100%; z-index: 10000; }
         .fixed-banner {
-            background: var(--zb-navy);
-            color: var(--zb-white);
-            text-align: center;
-            padding: 10px 20px;
-            font-weight: 600;
-            font-size: 14px; /* Base font size for the descriptive text */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px 15px;
-            min-height: 44px;
+            background: var(--zb-navy); color: var(--zb-white); text-align: center;
+            padding: 10px 20px; font-weight: 600; font-size: 14px;
+            display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px 15px; min-height: 44px;
         }
-        .fixed-banner a {
-            color: var(--zb-yellow);
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 20px; /* Increased size for the phone number on desktop */
-        }
-        .fixed-banner a i {
-            font-size: 20px; /* Adjust icon size to match text */
-        }
+        .fixed-banner a { color: var(--zb-yellow); font-weight: 800; display: inline-flex; align-items: center; gap: 5px; font-size: 18px; }
 
-        /* --- FLOATING ROUNDED HEADER --- */
         header {
-            margin: 15px auto 0;
-            width: 92%;
-            max-width: 1200px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-radius: var(--radius-pill);
-            box-shadow: var(--shadow-float);
-            border: 1px solid rgba(255,255,255,0.8);
+            margin: 10px auto 0; width: 94%; max-width: 1240px;
+            background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(12px);
+            padding: 10px 24px; display: flex; justify-content: space-between; align-items: center;
+            border-radius: var(--radius-pill); box-shadow: var(--shadow-float); border: 1px solid rgba(255,255,255,0.8);
         }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 900;
-            color: var(--zb-navy);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding-left: 10px;
-        }
+        .logo { font-size: 24px; font-weight: 900; color: var(--zb-navy); display: flex; align-items: center; gap: 8px; }
         .logo i { color: var(--zb-yellow); font-size: 26px; }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links a { font-weight: 600; color: var(--zb-navy); transition: var(--transition); font-size: 15px; }
+        .nav-links a:hover, .nav-links a.active { color: #f59e0b; }
 
         .btn-call {
-            background: var(--zb-yellow);
-            color: var(--zb-navy);
-            padding: 12px 24px;
-            border-radius: var(--radius-pill);
-            font-weight: 900;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: var(--transition);
+            background: var(--zb-yellow); color: var(--zb-navy); padding: 10px 20px;
+            border-radius: var(--radius-pill); font-weight: 800; font-size: 15px;
+            display: flex; align-items: center; gap: 8px; transition: var(--transition); white-space: nowrap;
         }
-        .btn-call:hover {
-            background: var(--zb-navy);
-            color: var(--zb-yellow);
-            transform: translateY(-2px);
-        }
+        .btn-call:hover { background: var(--zb-navy); color: var(--zb-yellow); transform: translateY(-2px); }
 
-        /* --- HERO SECTION --- */
         .hero {
-            position: relative;
-            padding: 80px 5% 160px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            background-color: var(--zb-navy);
-            color: var(--zb-white);
-            overflow: hidden;
+            position: relative; padding: 70px 5% 150px; display: flex; flex-direction: column;
+            align-items: center; text-align: center; background-color: var(--zb-navy); color: var(--zb-white); overflow: hidden;
         }
-
-        /* Background Image Overlay for Hero */
         .hero::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: url('https://images.unsplash.com/photo-1572675339312-3e8b094a544d?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover;
-            opacity: 0.15;
-            z-index: 0;
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1600&q=80') center/cover;
+            opacity: 0.18; z-index: 0;
         }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: clamp(36px, 5vw, 64px);
-            font-weight: 900;
-            line-height: 1.15;
-            margin-bottom: 24px;
-            max-width: 900px;
-            color: var(--zb-white);
-        }
+        .hero-content { position: relative; z-index: 2; max-width: 950px; }
+        .hero h1 { font-size: clamp(34px, 4.8vw, 60px); font-weight: 900; line-height: 1.15; margin-bottom: 20px; }
+        .hero h1 span { color: var(--zb-yellow); }
+        .hero p { font-size: clamp(16px, 1.8vw, 20px); color: #CBD5E1; margin-bottom: 30px; line-height: 1.6; max-width: 750px; margin-left: auto; margin-right: auto; }
         
-        .hero h1 span { 
-            color: var(--zb-yellow); 
-        }
-
-        .hero p {
-            font-size: clamp(16px, 2vw, 20px);
-            color: #CBD5E1;
-            margin-bottom: 30px;
-            max-width: 700px;
-            line-height: 1.6;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* --- NEW PROMINENT HERO BUTTON --- */
         .hero-btn-call {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            background: var(--zb-yellow);
-            color: var(--zb-navy);
-            padding: 18px 40px;
-            border-radius: var(--radius-pill);
-            font-weight: 900;
-            font-size: 22px;
-            transition: var(--transition);
-            box-shadow: 0 8px 24px rgba(255, 213, 0, 0.25);
+            display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+            background: var(--zb-yellow); color: var(--zb-navy); padding: 18px 38px;
+            border-radius: var(--radius-pill); font-weight: 900; font-size: 22px;
+            transition: var(--transition); box-shadow: 0 8px 24px rgba(255, 213, 0, 0.25);
             animation: pulse-ring 2s infinite;
         }
-        .hero-btn-call i {
-            font-size: 24px;
-        }
-        .hero-btn-call:hover {
-            background: var(--zb-white);
-            color: var(--zb-navy);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(255, 255, 255, 0.2);
-            animation: none;
-        }
+        .hero-btn-call:hover { background: var(--zb-white); color: var(--zb-navy); transform: translateY(-4px); animation: none; }
 
-        /* --- CUSTOM BOOKING WIDGET --- */
         .widget-wrapper {
-            position: relative;
-            z-index: 10;
-            margin: -100px auto 80px;
-            width: 92%;
-            max-width: 1100px;
-            background: var(--zb-white);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-float);
-            padding: 12px;
-            border: 2px solid var(--zb-navy);
+            position: relative; z-index: 10; margin: -90px auto 80px; width: 92%; max-width: 1100px;
+            background: var(--zb-white); border-radius: var(--radius-lg); box-shadow: var(--shadow-float);
+            padding: 12px; border: 2px solid var(--zb-navy);
         }
-
-        .mock-form {
-            display: flex;
-            flex-wrap: wrap;
-            background: var(--zb-white);
-            border-radius: var(--radius-md);
-        }
-
+        .mock-form { display: flex; flex-wrap: wrap; background: var(--zb-white); border-radius: var(--radius-md); }
         .input-block {
-            flex: 1 1 200px;
-            padding: 16px 24px;
-            border-right: 1px solid var(--zb-border);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
+            flex: 1 1 200px; padding: 16px 20px; border-right: 1px solid var(--zb-border);
+            display: flex; flex-direction: column; justify-content: center; cursor: pointer; transition: var(--transition);
         }
         .input-block:hover { background-color: var(--zb-bg-gray); }
-
-        .input-label {
-            font-size: 13px;
-            font-weight: 800;
-            color: var(--zb-navy);
-            text-transform: uppercase;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+        .input-label { font-size: 13px; font-weight: 800; color: var(--zb-navy); text-transform: uppercase; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
         .input-label i { color: var(--zb-yellow); font-size: 16px; }
-
-        .input-value {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--zb-black);
-            border: none;
-            background: transparent;
-            outline: none;
-            width: 100%;
-            cursor: pointer;
-        }
-        .input-value::placeholder { color: #94A3B8; }
-
-        .widget-submit {
-            flex: 0 0 auto;
-            background: var(--zb-navy);
-            color: var(--zb-white);
-            border: none;
-            padding: 0 35px;
-            font-size: 18px;
-            font-weight: 800;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: var(--transition);
-            border-radius: var(--radius-md);
-            margin: 6px;
-        }
-        .widget-submit:hover {
-            background: var(--zb-yellow);
-            color: var(--zb-navy);
-        }
-        .widget-submit i {
-            color: var(--zb-yellow);
-        }
-        .widget-submit:hover i {
-            color: var(--zb-navy);
-        }
-
-        /* --- SEO & VALUE PROP SECTION --- */
-        .seo-section {
-            padding: 0 5% 80px;
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        .seo-section h2 {
-            font-size: 32px;
-            color: var(--zb-navy);
-            font-weight: 900;
-            margin-bottom: 20px;
-        }
-        .seo-section p {
-            font-size: 18px;
-            line-height: 1.7;
-            color: var(--zb-text);
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        /* --- HORIZONTAL SERVICES CARDS --- */
-        .services-section {
-            padding: 0 5% 100px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .grid-horizontal {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 25px;
-        }
-
-        .h-card {
-            display: flex;
-            background: var(--zb-white);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            gap: 24px;
-            box-shadow: var(--shadow-card);
-            border: 1px solid var(--zb-border);
-            transition: var(--transition);
-            align-items: center;
-            cursor: pointer;
-        }
-        .h-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-card-hover);
-            border-color: var(--zb-navy);
-        }
-
-        .h-card-icon {
-            flex-shrink: 0;
-            width: 80px; height: 80px;
-            background: var(--zb-navy);
-            color: var(--zb-yellow);
-            border-radius: var(--radius-md);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 32px;
-            transition: var(--transition);
-        }
-        .h-card:hover .h-card-icon {
-            background: var(--zb-yellow);
-            color: var(--zb-navy);
-        }
-
-        .h-card-content {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .h-card h3 {
-            font-size: 22px;
-            font-weight: 800;
-            color: var(--zb-navy);
-            margin-bottom: 8px;
-        }
-        .h-card p {
-            font-size: 15px;
-            color: var(--zb-text);
-            line-height: 1.5;
-            margin-bottom: 12px;
-        }
-
-        .h-card-link {
-            font-weight: 900;
-            color: var(--zb-navy);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 16px;
-            transition: var(--transition);
-        }
-        .h-card-link i {
-            color: var(--zb-yellow);
-            font-size: 18px;
-            transition: var(--transition);
-        }
-        .h-card:hover .h-card-link {
-            color: #000;
-        }
-        .h-card:hover .h-card-link i {
-            color: var(--zb-navy);
-        }
-
-        /* --- FLOATING ACTION BUTTON --- */
-        .fab {
-            position: fixed;
-            bottom: 30px; right: 30px;
-            background: var(--zb-navy);
-            color: var(--zb-yellow);
-            width: 65px; height: 65px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 28px;
-            box-shadow: var(--shadow-float);
-            z-index: 9999;
-            transition: var(--transition);
-            border: 2px solid var(--zb-yellow);
-        }
-        .fab:hover {
-            transform: scale(1.1);
-            background: var(--zb-yellow);
-            color: var(--zb-navy);
-            border-color: var(--zb-navy);
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            background: var(--zb-navy);
-            color: var(--zb-white);
-            padding: 80px 5% 40px;
-        }
-
-        .disclaimer-box {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-left: 4px solid var(--zb-yellow);
-            padding: 24px;
-            border-radius: var(--radius-md);
-            margin-bottom: 50px;
-            font-size: 14px;
-            line-height: 1.7;
-            color: #CBD5E1;
-        }
-        .disclaimer-box strong { color: var(--zb-white); }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 50px;
-        }
+        .input-value { font-size: 17px; font-weight: 600; color: var(--zb-black); border: none; background: transparent; outline: none; width: 100%; cursor: pointer; }
         
-        .footer-col h4 {
-            color: var(--zb-yellow);
-            font-size: 18px;
-            font-weight: 800;
-            margin-bottom: 20px;
+        .widget-submit {
+            flex: 0 0 auto; background: var(--zb-navy); color: var(--zb-white); border: none;
+            padding: 0 32px; font-size: 17px; font-weight: 800; cursor: pointer; display: flex;
+            align-items: center; justify-content: center; gap: 10px; transition: var(--transition);
+            border-radius: var(--radius-md); margin: 6px;
         }
+        .widget-submit:hover { background: var(--zb-yellow); color: var(--zb-navy); }
+
+        .seo-section { padding: 20px 5% 70px; max-width: 1200px; margin: 0 auto; text-align: center; }
+        .seo-section h2 { font-size: 32px; color: var(--zb-navy); font-weight: 900; margin-bottom: 16px; }
+        .seo-section p { font-size: 17px; line-height: 1.7; color: var(--zb-text); max-width: 900px; margin: 0 auto; }
+
+        .services-section { padding: 0 5% 90px; max-width: 1200px; margin: 0 auto; }
+        .grid-horizontal { display: grid; grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); gap: 25px; }
+        .h-card {
+            display: flex; background: var(--zb-white); border-radius: var(--radius-lg);
+            padding: 24px; gap: 20px; box-shadow: var(--shadow-card); border: 1px solid var(--zb-border);
+            transition: var(--transition); align-items: center; cursor: pointer;
+        }
+        .h-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-card-hover); border-color: var(--zb-navy); }
+        .h-card-icon {
+            flex-shrink: 0; width: 75px; height: 75px; background: var(--zb-navy);
+            color: var(--zb-yellow); border-radius: var(--radius-md); display: flex;
+            justify-content: center; align-items: center; font-size: 30px; transition: var(--transition);
+        }
+        .h-card:hover .h-card-icon { background: var(--zb-yellow); color: var(--zb-navy); }
+        .h-card h3 { font-size: 21px; font-weight: 800; color: var(--zb-navy); margin-bottom: 6px; }
+        .h-card p { font-size: 15px; color: var(--zb-text); line-height: 1.5; margin-bottom: 12px; }
+        .h-card-link { font-weight: 800; color: var(--zb-navy); display: flex; align-items: center; gap: 8px; font-size: 15px; }
+
+        .route-highlights { padding: 60px 5% 90px; background: #fff; border-top: 1px solid var(--zb-border); }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 45px; }
+        .section-header h2 { font-size: 32px; font-weight: 900; color: var(--zb-navy); margin-bottom: 10px; }
+        .section-header p { color: #64748B; font-size: 17px; }
+        
+        .route-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .route-card {
+            border-radius: var(--radius-md); overflow: hidden; background: var(--zb-bg-gray);
+            border: 1px solid var(--zb-border); transition: var(--transition);
+        }
+        .route-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-card-hover); }
+        .route-card img { width: 100%; height: 180px; object-fit: cover; }
+        .route-card-body { padding: 20px; }
+        .route-card-body h4 { font-size: 18px; font-weight: 800; color: var(--zb-navy); margin-bottom: 8px; }
+        .route-card-body p { font-size: 14px; color: var(--zb-text); margin-bottom: 15px; }
+        .route-card-body a { color: var(--zb-navy); font-weight: 800; font-size: 15px; display: inline-flex; align-items: center; gap: 6px; }
+
+        .fab {
+            position: fixed; bottom: 30px; right: 30px; background: var(--zb-navy); color: var(--zb-yellow);
+            width: 65px; height: 65px; border-radius: 50%; display: flex; justify-content: center;
+            align-items: center; font-size: 28px; box-shadow: var(--shadow-float); z-index: 9999;
+            transition: var(--transition); border: 2px solid var(--zb-yellow);
+        }
+        .fab:hover { transform: scale(1.1); background: var(--zb-yellow); color: var(--zb-navy); }
+
+        footer { background: var(--zb-navy); color: var(--zb-white); padding: 80px 5% 40px; }
+        .disclaimer-box {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--zb-yellow); padding: 24px; border-radius: var(--radius-md);
+            margin-bottom: 50px; font-size: 14px; line-height: 1.7; color: #CBD5E1;
+        }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 50px; }
+        .footer-col h4 { color: var(--zb-yellow); font-size: 18px; font-weight: 800; margin-bottom: 20px; }
         .footer-col ul li { margin-bottom: 12px; }
         .footer-col ul li a { color: #CBD5E1; transition: var(--transition); font-size: 15px; }
-        .footer-col ul li a:hover { color: var(--zb-white); padding-left: 5px; }
+        .footer-col ul li a:hover { color: var(--zb-white); padding-left: 4px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #94A3B8; font-size: 14px; }
 
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #94A3B8;
-            font-size: 14px;
-        }
-
-        /* --- RESPONSIVE DESIGN --- */
         @media (max-width: 992px) {
+            .nav-links { display: none; }
             .grid-horizontal { grid-template-columns: 1fr; }
             .widget-wrapper { margin-top: -60px; }
             .input-block { flex-basis: 45%; border-bottom: 1px solid var(--zb-border); }
-            /* Remove right border from every 2nd element on tablet */
             .input-block:nth-child(2n) { border-right: none; }
-            .input-block:nth-last-child(2) { border-right: none; }
-            .widget-submit { flex-basis: 100%; margin: 12px; padding: 18px; }
+            .widget-submit { flex-basis: 100%; margin: 12px; padding: 16px; }
         }
-
         @media (max-width: 768px) {
-            body { padding-top: 130px; }
-            
-            /* Mobile Header Adjustments */
-            .fixed-banner { 
-                font-size: 12px; 
-                padding: 8px; 
-            }
-            .fixed-banner a {
-                font-size: 16px; /* Adjust for mobile to prevent overflow */
-            }
-            .fixed-banner a i {
-                font-size: 16px; /* Adjust icon size to match text on mobile */
-            }
-
-            header { margin-top: 10px; padding: 8px 15px; width: 95%; }
+            body { padding-top: 135px; }
+            .fixed-banner { font-size: 12px; padding: 8px; }
+            .fixed-banner a { font-size: 16px; }
+            header { padding: 8px 16px; width: 95%; }
             .logo { font-size: 20px; }
-            .btn-call { padding: 10px 14px; font-size: 14px; }
-            
-            /* Mobile Hero */
-            .hero { padding-top: 60px; padding-bottom: 120px; }
-            .hero h1 { font-size: 32px; }
-            .hero-btn-call { padding: 16px 28px; font-size: 18px; width: 100%; max-width: 320px; margin: 10px auto 0; }
-            
-            /* Mobile Widget */
+            .hero { padding-top: 50px; padding-bottom: 110px; }
+            .hero h1 { font-size: 30px; }
+            .hero-btn-call { padding: 14px 26px; font-size: 18px; width: 100%; }
             .mock-form { flex-direction: column; }
-            .input-block { flex-basis: 100%; border-right: none !important; border-bottom: 1px solid var(--zb-border); padding: 12px 20px; }
-            .input-block:nth-last-child(2) { border-bottom: none; }
-            
-            /* Mobile Cards */
-            .h-card { flex-direction: column; text-align: center; gap: 15px; padding: 30px 20px; }
+            .input-block { flex-basis: 100%; border-right: none !important; }
+            .h-card { flex-direction: column; text-align: center; padding: 25px 15px; }
             .h-card-icon { margin: 0 auto; }
             .h-card-link { justify-content: center; }
         }
@@ -544,80 +209,71 @@
 </head>
 <body>
 
-    <!-- 1. HEADER WRAPPER (Prevents overlapping on all devices) -->
     <div class="header-wrapper">
-        <!-- FIXED TOP BANNER -->
         <div class="fixed-banner">
             <span>Independent Travel Booking Assistance</span>
             <a href="tel:+16079527259"><i class="bi bi-telephone-fill"></i> (607) 952-7259</a>
         </div>
 
-        <!-- FLOATING ROUNDED HEADER -->
         <header>
-            <a href="#" class="logo">
+            <a href="index.html" class="logo">
                 <i class="bi bi-bus-front-fill"></i> Zippy Bus
             </a>
-            <!-- Replaced generic "Call Now" with the actual number -->
+            <nav class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="faq.html">FAQs</a>
+                <a href="blog.html">Travel Blog</a>
+                <a href="contact.html">Contact</a>
+            </nav>
             <a href="tel:+16079527259" class="btn-call">
                 <i class="bi bi-telephone-outbound-fill"></i> (607) 952-7259
             </a>
         </header>
     </div>
 
-    <!-- 2. HERO SECTION (Dark background for perfect contrast) -->
     <section class="hero">
         <div class="hero-content reveal">
             <h1>Effortless Bus Ticket <span>Booking & Reservations</span></h1>
             <p>Your fastest route to nationwide bus travel. Call our booking specialists to instantly reserve tickets, modify itineraries, or process cancellations with ease.</p>
-            
-            <!-- NEW HIGH-VISIBILITY CALL BUTTON -->
             <a href="tel:+16079527259" class="hero-btn-call">
                 <i class="bi bi-telephone-fill"></i> Call (607) 952-7259
             </a>
         </div>
     </section>
 
-    <!-- 3. CUSTOM BOOKING WIDGET (UI acts as a massive CTA) -->
     <div class="widget-wrapper reveal delay-1">
         <form action="tel:+16079527259" class="mock-form">
             <div class="input-block" onclick="window.location.href='tel:+16079527259'">
                 <div class="input-label"><i class="bi bi-geo-alt-fill"></i> Leaving From</div>
                 <input type="text" class="input-value" placeholder="City or Station" readonly>
             </div>
-            
             <div class="input-block" onclick="window.location.href='tel:+16079527259'">
                 <div class="input-label"><i class="bi bi-pin-map-fill"></i> Going To</div>
                 <input type="text" class="input-value" placeholder="City or Station" readonly>
             </div>
-            
             <div class="input-block" onclick="window.location.href='tel:+16079527259'">
                 <div class="input-label"><i class="bi bi-calendar-event-fill"></i> Travel Date</div>
                 <input type="text" class="input-value" placeholder="Select Date" readonly>
             </div>
-            
             <div class="input-block" onclick="window.location.href='tel:+16079527259'">
                 <div class="input-label"><i class="bi bi-person-fill"></i> Passengers</div>
                 <input type="text" class="input-value" placeholder="1 Adult" readonly>
             </div>
-            
-            <!-- Replaced generic "Search" with phone number CTA -->
             <a href="tel:+16079527259" class="widget-submit">
-                <i class="bi bi-telephone-fill"></i> Call (607) 952-7259 to Search
+                <i class="bi bi-telephone-fill"></i> Search & Call
             </a>
         </form>
     </div>
 
-    <!-- 4. SEO & VALUE PROP SECTION -->
     <section class="seo-section reveal">
         <h2>Why Choose Zippy Bus for Your Travel Needs?</h2>
-        <p>Finding cheap bus tickets and managing nationwide bus routes shouldn't be a hassle. Whether you need to secure a last-minute seat, change your bus schedule, or process a refund, our dedicated phone agents make bus ticket booking online seamless and stress-free. One call is all it takes to finalize your itinerary.</p>
+        <p>Finding cheap bus tickets and managing nationwide bus routes shouldn't be stressful. Whether you need to secure a last-minute seat, change your bus schedule, or process a refund, our dedicated phone agents make travel booking online seamless and human-guided.</p>
     </section>
 
-    <!-- 5. HORIZONTAL SERVICES CARDS (All trigger phone call) -->
     <section class="services-section">
         <div class="grid-horizontal">
-            
-            <!-- Card 1 -->
             <div class="h-card reveal" onclick="window.location.href='tel:+16079527259'">
                 <div class="h-card-icon"><i class="bi bi-ticket-detailed-fill"></i></div>
                 <div class="h-card-content">
@@ -626,8 +282,6 @@
                     <span class="h-card-link"><i class="bi bi-telephone-fill"></i> (607) 952-7259 to Book</span>
                 </div>
             </div>
-
-            <!-- Card 2 -->
             <div class="h-card reveal delay-1" onclick="window.location.href='tel:+16079527259'">
                 <div class="h-card-icon"><i class="bi bi-star-fill"></i></div>
                 <div class="h-card-content">
@@ -636,8 +290,6 @@
                     <span class="h-card-link"><i class="bi bi-telephone-fill"></i> (607) 952-7259 to Upgrade</span>
                 </div>
             </div>
-
-            <!-- Card 3 -->
             <div class="h-card reveal" onclick="window.location.href='tel:+16079527259'">
                 <div class="h-card-icon"><i class="bi bi-calendar2-range-fill"></i></div>
                 <div class="h-card-content">
@@ -646,8 +298,6 @@
                     <span class="h-card-link"><i class="bi bi-telephone-fill"></i> (607) 952-7259 to Modify</span>
                 </div>
             </div>
-
-            <!-- Card 4 -->
             <div class="h-card reveal delay-1" onclick="window.location.href='tel:+16079527259'">
                 <div class="h-card-icon"><i class="bi bi-x-circle-fill"></i></div>
                 <div class="h-card-content">
@@ -656,21 +306,52 @@
                     <span class="h-card-link"><i class="bi bi-telephone-fill"></i> (607) 952-7259 to Cancel</span>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- 6. FLOATING ACTION BUTTON -->
+    <section class="route-highlights">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Popular Travel Corridors</h2>
+                <p>Call our reservation desk anytime to secure tickets on high-demand intercity routes.</p>
+            </div>
+            <div class="route-grid">
+                <div class="route-card reveal">
+                    <img src="https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=600&q=80" alt="New York to Boston Bus Route">
+                    <div class="route-card-body">
+                        <h4>New York ➔ Boston</h4>
+                        <p>Daily departures every hour with comfortable seating and Wi-Fi.</p>
+                        <a href="tel:+16079527259"><i class="bi bi-telephone-fill"></i> Book (607) 952-7259</a>
+                    </div>
+                </div>
+                <div class="route-card reveal delay-1">
+                    <img src="https://images.unsplash.com/photo-1494522855154-9297ac14b55f?auto=format&fit=crop&w=600&q=80" alt="Chicago to Detroit Bus Route">
+                    <div class="route-card-body">
+                        <h4>Chicago ➔ Detroit</h4>
+                        <p>Fast Midwest regional connections with ample luggage allowance.</p>
+                        <a href="tel:+16079527259"><i class="bi bi-telephone-fill"></i> Book (607) 952-7259</a>
+                    </div>
+                </div>
+                <div class="route-card reveal delay-2">
+                    <img src="https://images.unsplash.com/photo-1580655653885-65763b2597d0?auto=format&fit=crop&w=600&q=80" alt="Los Angeles to Las Vegas Bus">
+                    <div class="route-card-body">
+                        <h4>Los Angeles ➔ Las Vegas</h4>
+                        <p>Scenic weekend express buses with premium extra-legroom seats.</p>
+                        <a href="tel:+16079527259"><i class="bi bi-telephone-fill"></i> Book (607) 952-7259</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <a href="tel:+16079527259" class="fab" aria-label="Call Now">
         <i class="bi bi-telephone-fill"></i>
     </a>
 
-    <!-- 7. FOOTER -->
     <footer>
         <div class="disclaimer-box reveal">
             <strong>IMPORTANT DISCLAIMER:</strong> Zippy Bus is an independent travel assistance and referral service connecting travelers with independent booking agents. <strong>We are NOT affiliated with, endorsed by, or officially connected to Greyhound, FlixBus, Megabus, or any official bus carrier.</strong> Bookings made through our agents may include an agency service fee for their time and expertise in finding routes and managing itineraries. You always have the option to book tickets directly through the official carrier website without paying a service fee.
         </div>
-
         <div class="footer-grid reveal delay-1">
             <div class="footer-col">
                 <div class="logo" style="color: var(--zb-white); margin-bottom: 15px;">
@@ -678,27 +359,27 @@
                 </div>
                 <p style="color: #CBD5E1; font-size: 14px; line-height: 1.6;">Your trusted independent phone-based assistance service dedicated to making bus travel reservations easy, fast, and secure.</p>
             </div>
-            
             <div class="footer-col">
-                <h4>Quick Services</h4>
+                <h4>Navigation</h4>
                 <ul>
-                    <li><a href="tel:+16079527259">Book a Ticket</a></li>
-                    <li><a href="tel:+16079527259">Change Itinerary</a></li>
-                    <li><a href="tel:+16079527259">Cancel Reservation</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services & Support</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="blog.html">Travel Blog</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
                 </ul>
             </div>
-            
             <div class="footer-col">
-                <h4>Contact Us</h4>
+                <h4>Quick Assistance</h4>
                 <ul>
                     <li><a href="tel:+16079527259"><i class="bi bi-telephone"></i> (607) 952-7259</a></li>
-                    <li><a href="#"><i class="bi bi-envelope"></i> support@zippybus.online</a></li>
+                    <li><a href="mailto:support@zippybus.online"><i class="bi bi-envelope"></i> support@zippybus.online</a></li>
                     <li><span style="color: #CBD5E1;"><i class="bi bi-geo-alt"></i> New York, NY, USA</span></li>
                 </ul>
             </div>
-            
             <div class="footer-col">
-                <h4>Legal</h4>
+                <h4>Legal Policies</h4>
                 <ul>
                     <li><a href="privacy.html">Privacy Policy</a></li>
                     <li><a href="terms.html">Terms & Conditions</a></li>
@@ -706,32 +387,22 @@
                 </ul>
             </div>
         </div>
-
         <div class="footer-bottom">
             &copy; 2026 Zippy Bus Independent Travel Assistance. All rights reserved.
         </div>
     </footer>
 
-    <!-- SCROLL ANIMATION SCRIPT -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
+            const observer = new IntersectionObserver((entries, obs) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
-                        observer.unobserve(entry.target); // Trigger once
+                        obs.unobserve(entry.target);
                     }
                 });
-            }, observerOptions);
-
-            const revealElements = document.querySelectorAll('.reveal');
-            revealElements.forEach(el => observer.observe(el));
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         });
     </script>
 </body>
